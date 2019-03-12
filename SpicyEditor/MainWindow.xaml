@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpicyEditor"
-        
+
         mc:Ignorable="d"
-        Title="SpicyEditor" Height="450" Width="800">
+        Title="SpicyEditor" Height="596.922" Width="867.164">
+    
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Close"
                         Executed="CloseCommandHandler"/>
@@ -16,20 +17,31 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" VerticalAlignment="Top">
-                <MenuItem Header="File">
-                    <!--<MenuItem Header="New Project" ></MenuItem>
+        <Menu Grid.Row="0" VerticalAlignment="Top" Height="26" Margin="0,0,-0.2,0" Grid.RowSpan="2">
+            <MenuItem Header="File">
+                <!--<MenuItem Header="New Project" ></MenuItem>
                 <MenuItem Header="Open Project" >
                     <MenuItem Header="WinForms"></MenuItem>
                     <MenuItem Header="WPF" ></MenuItem>
                 </MenuItem>
                 <Separator />-->
-                <MenuItem Header="Exit" Command="ApplicationCommands.Close" />
+                <MenuItem Header="Open file" Command="{Binding OpenCommand}" />
+                <MenuItem Header="Save file" Command="{Binding SaveCommand}" />
+                <MenuItem Header="Save file as" Command="ApplicationCommands.Close" />
             </MenuItem>
-                <!--<MenuItem Header="Edit" ></MenuItem>
+            <MenuItem Header="Exit" Command="ApplicationCommands.Close" ToolTip="Exit" RenderTransformOrigin="0.5,0.5">
+            </MenuItem>
+            <!--<MenuItem Header="Edit" ></MenuItem>
             <MenuItem Header="View" ></MenuItem>-->
-            </Menu>
+        </Menu>
 
-        <TextBox Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"/>
+        <TextBox Grid.Row="1" 
+                 TextWrapping="Wrap" 
+                 AcceptsReturn="True" 
+                 AcceptsTab="True" 
+                 Margin="0,31,-0.2,0.2"
+                 Text="{Binding MainText, UpdateSourceTrigger=PropertyChanged}"
+                 
+                 />
     </Grid>
 </Window>
