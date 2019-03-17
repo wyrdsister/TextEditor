@@ -20,7 +20,9 @@ namespace SpicyEditor
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+           if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop)); // почему-то не работает
         }
 
         private string mainText;
@@ -93,5 +95,7 @@ namespace SpicyEditor
                   }));
             }
         }
+
+
     }
 }

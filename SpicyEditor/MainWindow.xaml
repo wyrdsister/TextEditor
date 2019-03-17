@@ -11,6 +11,10 @@
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Close"
                         Executed="CloseCommandHandler"/>
+        <CommandBinding Command="ApplicationCommands.Delete"
+                        Executed="DeleteCommandHandler"/>
+        <CommandBinding Command="ApplicationCommands.Find"
+                        Executed="FindCommandHandler"/>
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -22,6 +26,7 @@
                 <MenuItem Header="Open file" Command="{Binding OpenCommand}" />
                 <MenuItem Header="Save file" Command="{Binding SaveCommand}" />
                 <MenuItem Header="Save file as" Command="ApplicationCommands.Close" IsEnabled="False" />
+                <MenuItem Header="Prit" Command="ApplicationCommands.Print" />
                 <Separator></Separator>
                 <MenuItem Header="Exit" Command="ApplicationCommands.Close" />
             </MenuItem>
@@ -29,8 +34,15 @@
                 <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
                 <MenuItem Header="Paste" Command="ApplicationCommands.Paste" />
                 <MenuItem Header="Cut" Command="ApplicationCommands.Cut" />
+                <MenuItem Header="Undo" Command="ApplicationCommands.Undo" />
+                <MenuItem Header="Redo" Command="ApplicationCommands.Redo" />
+                <MenuItem Header="SelectAll" Command="ApplicationCommands.SelectAll" />
+                <MenuItem Header="Delete" Command="ApplicationCommands.Delete" />
+                <MenuItem Header="Find" Command="ApplicationCommands.Find" />
+                <MenuItem Header="Replace" Command="ApplicationCommands.Replace" />
+                <MenuItem Header="Help" Command="ApplicationCommands.Help" />
             </MenuItem >
         </Menu>
-        <TextBox Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding MainText, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Name="TextBox" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" MouseDoubleClick="TextBox_MouseDoubleClick_1" Text="{Binding MainText, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </Window>
