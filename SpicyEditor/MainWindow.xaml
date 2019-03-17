@@ -17,31 +17,20 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" VerticalAlignment="Top" Height="26" Margin="0,0,-0.2,0" Grid.RowSpan="2">
+        <Menu Grid.Row="0" VerticalAlignment="Top" Height="20">
             <MenuItem Header="File">
-                <!--<MenuItem Header="New Project" ></MenuItem>
-                <MenuItem Header="Open Project" >
-                    <MenuItem Header="WinForms"></MenuItem>
-                    <MenuItem Header="WPF" ></MenuItem>
-                </MenuItem>
-                <Separator />-->
                 <MenuItem Header="Open file" Command="{Binding OpenCommand}" />
                 <MenuItem Header="Save file" Command="{Binding SaveCommand}" />
-                <MenuItem Header="Save file as" Command="ApplicationCommands.Close" />
+                <MenuItem Header="Save file as" Command="ApplicationCommands.Close" IsEnabled="False" />
+                <Separator></Separator>
+                <MenuItem Header="Exit" Command="ApplicationCommands.Close" />
             </MenuItem>
-            <MenuItem Header="Exit" Command="ApplicationCommands.Close" ToolTip="Exit" RenderTransformOrigin="0.5,0.5">
-            </MenuItem>
-            <!--<MenuItem Header="Edit" ></MenuItem>
-            <MenuItem Header="View" ></MenuItem>-->
+            <MenuItem Header ="Edit">
+                <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
+                <MenuItem Header="Paste" Command="ApplicationCommands.Paste" />
+                <MenuItem Header="Cut" Command="ApplicationCommands.Cut" />
+            </MenuItem >
         </Menu>
-
-        <TextBox Grid.Row="1" 
-                 TextWrapping="Wrap" 
-                 AcceptsReturn="True" 
-                 AcceptsTab="True" 
-                 Margin="0,31,-0.2,0.2"
-                 Text="{Binding MainText, UpdateSourceTrigger=PropertyChanged}"
-                 
-                 />
+        <TextBox Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding MainText, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </Window>

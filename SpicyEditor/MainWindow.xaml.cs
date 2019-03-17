@@ -24,21 +24,12 @@ namespace SpicyEditor
         public MainWindow()
         {
             InitializeComponent();
-            DataContext =
-                new ViewModel(new DialogService(), new JsonFileService());
+            DataContext = new ViewModel(new DialogService(), new JsonFileService());
         }
 
         private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             this.Close();
         }
-
-        //private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    TextBox textBox = (TextBox)sender;
-        //    ViewModel vm = new ViewModel();
-        //    vm.MainText = textBox.Text;
-        //    //MessageBox.Show(textBox.Text);
-        //}
     }
 }

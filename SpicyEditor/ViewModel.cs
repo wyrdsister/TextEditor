@@ -20,8 +20,7 @@ namespace SpicyEditor
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
         private string mainText;
@@ -56,7 +55,7 @@ namespace SpicyEditor
                           if (dialogService.SaveFileDialog() == true)
                           {
                               fileService.Save(dialogService.FilePath, MainText);
-                              dialogService.ShowMessage("Файл сохранен");
+                              //dialogService.ShowMessage("Файл сохранен");
                           }
                       }
                       catch (Exception ex)
@@ -84,7 +83,7 @@ namespace SpicyEditor
                               MainText = "";
                               foreach (var p in text)
                                   MainText += p;
-                              dialogService.ShowMessage("Файл открыт");
+                              //dialogService.ShowMessage("Файл открыт");
                           }
                       }
                       catch (Exception ex)

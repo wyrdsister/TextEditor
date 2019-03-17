@@ -16,8 +16,9 @@ namespace SpicyEditor
             DataContractJsonSerializer jsonFormatter =
                 new DataContractJsonSerializer(typeof(string));
             using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
+            using (StreamReader sr = new StreamReader(fs))
             {
-                text = jsonFormatter.ReadObject(fs) as string;
+                text = sr.ReadToEnd(); //jsonFormatter.ReadObject(fs) as string;
             }
 
             return text;

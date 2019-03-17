@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpicyEditor
+﻿namespace SpicyEditor
 {
-    interface IFileService
+    public interface IFileService
     {
         string Open(string filename);
-        void Save(string filename, string MainText);
+        void Save(string filename, string text);
     }
 }
