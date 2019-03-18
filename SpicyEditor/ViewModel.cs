@@ -15,8 +15,6 @@ namespace SpicyEditor
         {
             DialogService = new DialogService();
             FileService = new SimpleFileServer();
-           if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
             //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop)); // почему-то не работает
         }
 
@@ -33,13 +31,11 @@ namespace SpicyEditor
             }
         }
 
-
         public SaveCommand SaveCommand { get; set; } = new SaveCommand();
         public SaveAsCommand SaveAsCommand { get; set; } = new SaveAsCommand();
         public OpenCommand OpenCommand { get; set; } = new OpenCommand();
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
