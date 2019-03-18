@@ -15,6 +15,9 @@ namespace SpicyEditor
         {
             DialogService = new DialogService();
             FileService = new SimpleFileServer();
+           if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop)); // почему-то не работает
         }
 
         public IFileService FileService { get; }
@@ -48,5 +51,7 @@ namespace SpicyEditor
             //_text = text;
             OnPropertyChanged(nameof(MainText));
         }
+
+
     }
 }

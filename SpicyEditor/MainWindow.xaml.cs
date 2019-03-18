@@ -31,9 +31,55 @@ namespace SpicyEditor
             this.Close();
         }
 
-        void CloseAppCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            e.CanExecute = true;
+            TextBox.SelectedText = "";
+        }
+        private void FindCommandHandler(object sender, ExecutedRoutedEventArgs e) // нужно окно для ввода текста
+        {
+            string find = "";
+            WindowFind windowFind = new WindowFind();
+            windowFind.Owner = this;
+            if (windowFind.ShowDialog() == true)
+                find = windowFind.getText;
+
+            if (TextBox.Text.Contains(find))
+            {
+                int i = 0;
+                while (i <= TextBox.Text.Length - find.Length)
+                {
+                    i = TextBox.Text.IndexOf(find, i);
+                    if (i < 0) break;
+                    TextBox.SelectionStart = i;
+                    TextBox.SelectionLength = find.Length;
+                    //TextBox.SelectionColor = Color.Blue;
+                    TextBox.Focus();
+                    i += find.Length;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Не найдено ни одного соответствия");
+            }
+        }
+
+        private void ReplaceCommandHandler(object sender, ExecutedRoutedEventArgs e) // нужно окно для ввода текста
+        {
+            string oldStr = ""; string newStr = "";
+            WindowFind windowFind = new WindowFind();
+            windowFind.Owner = this;
+            windowFind.LabelSearch.Content = "Old text";
+            windowFind.Title = "Replace";
+            windowFind.searchButton.Content = "Replace";
+            windowFind.labelReplace.Content = "New text";
+            windowFind.labelReplace.IsEnabled = true;
+            windowFind.replaceText.IsEnabled = true;
+            if (windowFind.ShowDialog() == true)
+            {
+                oldStr = windowFind.getText;
+                newStr = windowFind.getReplaceText;
+            }
+            TextBox.Text = TextBox.Text.Replace(oldStr, newStr);
         }
     }
 }

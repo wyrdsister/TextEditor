@@ -13,6 +13,12 @@
         <CommandBinding Command="SystemCommands.CloseWindowCommand"
                         CanExecute="CloseAppCanExecute"
                         Executed="CloseApp"/>
+        <CommandBinding Command="ApplicationCommands.Delete"
+                        Executed="DeleteCommandHandler"/>
+        <CommandBinding Command="ApplicationCommands.Find"
+                        Executed="FindCommandHandler"/>
+        <CommandBinding Command="ApplicationCommands.Replace"
+                        Executed="ReplaceCommandHandler"/>
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -31,6 +37,13 @@
                 <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
                 <MenuItem Header="Paste" Command="ApplicationCommands.Paste" />
                 <MenuItem Header="Cut" Command="ApplicationCommands.Cut" />
+                <MenuItem Header="Undo" Command="ApplicationCommands.Undo" />
+                <MenuItem Header="Redo" Command="ApplicationCommands.Redo" />
+                <MenuItem Header="SelectAll" Command="ApplicationCommands.SelectAll" />
+                <MenuItem Header="Delete" Command="ApplicationCommands.Delete" />
+                <MenuItem Header="Find" Command="ApplicationCommands.Find" />
+                <MenuItem Header="Replace" Command="ApplicationCommands.Replace" />
+                <MenuItem Header="Help" Command="ApplicationCommands.Help" />
             </MenuItem >
         </Menu>
         <TextBox Grid.Row="1" TextWrapping="Wrap" 
