@@ -1,8 +1,10 @@
-﻿namespace SpicyEditor
+﻿using SpicyEditor.Core;
+
+namespace SpicyEditor
 {
     public interface IFileService
     {
-        string Open(string filename);
+        ITextStructure Open(string filename);
         void Save(string filename, string text);
     }
 }

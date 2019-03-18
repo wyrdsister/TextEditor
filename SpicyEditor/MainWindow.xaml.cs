@@ -24,12 +24,16 @@ namespace SpicyEditor
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModel(new DialogService(), new JsonFileService());
         }
 
-        private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        void CloseApp(object target, ExecutedRoutedEventArgs e)
         {
             this.Close();
+        }
+
+        void CloseAppCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
         }
     }
 }

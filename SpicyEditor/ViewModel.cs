@@ -1,97 +1,52 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Interactivity;
-using Microsoft.Win32;
-using System.Windows;
+using SpicyEditor.Commands;
+using SpicyEditor.Core;
 
-
-namespace SpicyEditor 
+namespace SpicyEditor
 {
-    class ViewModel : INotifyPropertyChanged
+    internal class ViewModel : INotifyPropertyChanged
     {
-        IFileService fileService;
-        IDialogService dialogService;
+        private string _stupidText;
+//        private ITextStructure _text;
+
+        public ViewModel()
+        {
+            DialogService = new DialogService();
+            FileService = new SimpleFileServer();
+        }
+
+        public IFileService FileService { get; }
+        public IDialogService DialogService { get; }
+
+        public string MainText
+        {
+            get => _stupidText;
+            set
+            {
+                _stupidText = value;
+                OnPropertyChanged(MainText);
+            }
+        }
+
+
+        public SaveCommand SaveCommand { get; set; } = new SaveCommand();
+        public SaveAsCommand SaveAsCommand { get; set; } = new SaveAsCommand();
+        public OpenCommand OpenCommand { get; set; } = new OpenCommand();
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
+
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
-        private string mainText;
-        public string MainText
+        public void SetText(ITextStructure text)
         {
-            get { return mainText; }
-            set
-            {
-                mainText = value;
-                OnPropertyChanged("MainText");
-            }
-        }
-
-        public ViewModel(IDialogService dialogService, IFileService fileService)
-        {
-            this.dialogService = dialogService;
-            this.fileService = fileService;
-        }
-
-
-        // команда сохранения файла
-        private RelayCommand saveCommand;
-        public RelayCommand SaveCommand
-        {
-            get
-            {
-                return saveCommand ??
-                  (saveCommand = new RelayCommand(obj =>
-                  {
-                      try
-                      {
-                          if (dialogService.SaveFileDialog() == true)
-                          {
-                              fileService.Save(dialogService.FilePath, MainText);
-                              //dialogService.ShowMessage("Файл сохранен");
-                          }
-                      }
-                      catch (Exception ex)
-                      {
-                          dialogService.ShowMessage(ex.Message);
-                      }
-                  }));
-            }
-        }
-
-        // команда открытия файла
-        private RelayCommand openCommand;
-        public RelayCommand OpenCommand
-        {
-            get
-            {
-                return openCommand ??
-                  (openCommand = new RelayCommand(obj =>
-                  {
-                      try
-                      {
-                          if (dialogService.OpenFileDialog() == true)
-                          {
-                              var text = fileService.Open(dialogService.FilePath);
-                              MainText = "";
-                              foreach (var p in text)
-                                  MainText += p;
-                              //dialogService.ShowMessage("Файл открыт");
-                          }
-                      }
-                      catch (Exception ex)
-                      {
-                          dialogService.ShowMessage(ex.Message);
-                      }
-                  }));
-            }
+            _stupidText = text.AsString();
+            //_text = text;
+            OnPropertyChanged(nameof(MainText));
         }
     }
 }

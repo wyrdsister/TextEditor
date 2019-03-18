@@ -4,13 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpicyEditor"
-
         mc:Ignorable="d"
         Title="SpicyEditor" Height="596.922" Width="867.164">
-    
+    <Window.DataContext>
+        <local:ViewModel/>
+    </Window.DataContext>
     <Window.CommandBindings>
-        <CommandBinding Command="ApplicationCommands.Close"
-                        Executed="CloseCommandHandler"/>
+        <CommandBinding Command="SystemCommands.CloseWindowCommand"
+                        CanExecute="CloseAppCanExecute"
+                        Executed="CloseApp"/>
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -19,11 +21,11 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" VerticalAlignment="Top" Height="20">
             <MenuItem Header="File">
-                <MenuItem Header="Open file" Command="{Binding OpenCommand}" />
-                <MenuItem Header="Save file" Command="{Binding SaveCommand}" />
-                <MenuItem Header="Save file as" Command="ApplicationCommands.Close" IsEnabled="False" />
-                <Separator></Separator>
-                <MenuItem Header="Exit" Command="ApplicationCommands.Close" />
+                <MenuItem Header="Open..." Command="{Binding OpenCommand}" CommandParameter="{Binding .}" />
+                <MenuItem Header="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding .}"/>
+                <MenuItem Header="Save As..." Command="{Binding SaveAsCommand}" CommandParameter="{Binding .}"/>
+                <Separator/>
+                <MenuItem Header="Exit" Command="SystemCommands.CloseWindowCommand" />
             </MenuItem>
             <MenuItem Header ="Edit">
                 <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
@@ -31,6 +33,12 @@
                 <MenuItem Header="Cut" Command="ApplicationCommands.Cut" />
             </MenuItem >
         </Menu>
-        <TextBox Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding MainText, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Row="1" TextWrapping="Wrap" 
+                 AcceptsReturn="True" 
+                 AcceptsTab="True" 
+                 Text="{Binding MainText, UpdateSourceTrigger=PropertyChanged}"
+                 VerticalScrollBarVisibility="Auto"
+                 HorizontalScrollBarVisibility="Auto"/>
+
     </Grid>
 </Window>

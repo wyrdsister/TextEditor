@@ -64,10 +64,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DialogService.cs" />
-    <Compile Include="IDialogService.cs" />
-    <Compile Include="IFileService.cs" />
-    <Compile Include="JsonFileService.cs" />
+    <Compile Include="Commands\SaveAsCommand.cs" />
+    <Compile Include="Commands\SaveCommand.cs" />
+    <Compile Include="Commands\OpenCommand.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -100,6 +99,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SpicyEditor.Core\SpicyEditor.Core.csproj">
+      <Project>{96095233-7C6F-4160-A3F3-AC958D973E43}</Project>
+      <Name>SpicyEditor.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
