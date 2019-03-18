@@ -45,7 +45,12 @@ namespace SpicyEditor
         }
         private void FindCommandHandler(object sender, ExecutedRoutedEventArgs e) // нужно окно для ввода текста
         {
-            string find = "str";
+            string find = "";
+            WindowFind windowFind = new WindowFind();
+            windowFind.Owner = this;
+            if (windowFind.ShowDialog() == true)
+                find = windowFind.getText;
+
             if (TextBox.Text.Contains(find))
             {
                 int i = 0;
@@ -64,6 +69,25 @@ namespace SpicyEditor
             {
                 MessageBox.Show("Не найдено ни одного соответствия");
             }
+        }
+
+        private void ReplaceCommandHandler(object sender, ExecutedRoutedEventArgs e) // нужно окно для ввода текста
+        {
+            string oldStr = ""; string newStr = "";
+            WindowFind windowFind = new WindowFind();
+            windowFind.Owner = this;
+            windowFind.LabelSearch.Content = "Old text";
+            windowFind.Title = "Replace";
+            windowFind.searchButton.Content = "Replace";
+            windowFind.labelReplace.Content = "New text";
+            windowFind.labelReplace.IsEnabled = true;
+            windowFind.replaceText.IsEnabled = true;
+            if (windowFind.ShowDialog() == true)
+            {
+                oldStr = windowFind.getText;
+                newStr = windowFind.getReplaceText;
+            }
+            TextBox.Text = TextBox.Text.Replace(oldStr, newStr);
         }
     }
 }
