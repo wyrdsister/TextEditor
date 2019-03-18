@@ -33,7 +33,7 @@ namespace SpicyEditor
 
         private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            TextBox.SelectedText = "";
+//            TextBox.SelectedText = "";
         }
         private void FindCommandHandler(object sender, ExecutedRoutedEventArgs e) // нужно окно для ввода текста
         {
@@ -43,24 +43,24 @@ namespace SpicyEditor
             if (windowFind.ShowDialog() == true)
                 find = windowFind.getText;
 
-            if (TextBox.Text.Contains(find))
-            {
-                int i = 0;
-                while (i <= TextBox.Text.Length - find.Length)
-                {
-                    i = TextBox.Text.IndexOf(find, i);
-                    if (i < 0) break;
-                    TextBox.SelectionStart = i;
-                    TextBox.SelectionLength = find.Length;
-                    //TextBox.SelectionColor = Color.Blue;
-                    TextBox.Focus();
-                    i += find.Length;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Не найдено ни одного соответствия");
-            }
+//            if (TextBox.Text.Contains(find))
+//            {
+//                int i = 0;
+//                while (i <= TextBox.Text.Length - find.Length)
+//                {
+//                    i = TextBox.Text.IndexOf(find, i);
+//                    if (i < 0) break;
+//                    TextBox.SelectionStart = i;
+//                    TextBox.SelectionLength = find.Length;
+//                    //TextBox.SelectionColor = Color.Blue;
+//                    TextBox.Focus();
+//                    i += find.Length;
+//                }
+//            }
+//            else
+//            {
+//                MessageBox.Show("Не найдено ни одного соответствия");
+//            }
         }
 
         private void ReplaceCommandHandler(object sender, ExecutedRoutedEventArgs e) // нужно окно для ввода текста
@@ -79,7 +79,7 @@ namespace SpicyEditor
                 oldStr = windowFind.getText;
                 newStr = windowFind.getReplaceText;
             }
-            TextBox.Text = TextBox.Text.Replace(oldStr, newStr);
+//            TextBox.Text = TextBox.Text.Replace(oldStr, newStr);
         }
     }
 }

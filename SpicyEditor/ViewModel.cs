@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using ICSharpCode.AvalonEdit.Document;
 using SpicyEditor.Commands;
 using SpicyEditor.Core;
 
@@ -8,26 +10,25 @@ namespace SpicyEditor
 {
     internal class ViewModel : INotifyPropertyChanged
     {
-        private string _stupidText;
+        private TextDocument _smartText = new TextDocument();
 //        private ITextStructure _text;
 
         public ViewModel()
         {
             DialogService = new DialogService();
             FileService = new SimpleFileServer();
-            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop)); // почему-то не работает
         }
 
         public IFileService FileService { get; }
         public IDialogService DialogService { get; }
 
-        public string MainText
+        public TextDocument MainText
         {
-            get => _stupidText;
+            get => _smartText;
             set
             {
-                _stupidText = value;
-                OnPropertyChanged(MainText);
+                _smartText = value;
+                OnPropertyChanged(nameof(MainText));
             }
         }
 
@@ -43,7 +44,7 @@ namespace SpicyEditor
 
         public void SetText(ITextStructure text)
         {
-            _stupidText = text.AsString();
+            _smartText = new TextDocument(text.AsString().AsEnumerable());
             //_text = text;
             OnPropertyChanged(nameof(MainText));
         }

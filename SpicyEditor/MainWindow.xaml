@@ -45,13 +45,20 @@
                 <MenuItem Header="Help" Command="ApplicationCommands.Help" />
             </MenuItem >
         </Menu>
-        <TextBox x:Name="TextBox"
-            Grid.Row="1" TextWrapping="Wrap" 
-                 AcceptsReturn="True" 
-                 AcceptsTab="True" 
-                 Text="{Binding MainText, UpdateSourceTrigger=PropertyChanged}"
-                 VerticalScrollBarVisibility="Auto"
-                 HorizontalScrollBarVisibility="Auto"/>
+        <avalonEdit:TextEditor
+            Grid.Row="1" 
+            xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+            Name="textEditor"
+            FontSize="10pt"
+            Document="{Binding MainText}"
+            />
+        <!-- <TextBox x:Name="TextBox" -->
+        <!--     Grid.Row="1" TextWrapping="Wrap"  -->
+        <!--          AcceptsReturn="True"  -->
+        <!--          AcceptsTab="True"  -->
+        <!--          Text="{Binding MainText, UpdateSourceTrigger=PropertyChanged}" -->
+        <!--          VerticalScrollBarVisibility="Auto" -->
+        <!--          HorizontalScrollBarVisibility="Auto"/> -->
 
     </Grid>
 </Window>

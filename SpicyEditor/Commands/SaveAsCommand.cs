@@ -18,7 +18,7 @@ namespace SpicyEditor.Commands
                 throw new ArgumentException("Непоняточки с параметром команды Open");
 
             if (vm.DialogService.SaveFileDialog())
-                vm.FileService.Save(vm.DialogService.FilePath, vm.MainText); //  плохие side-эффекты
+                vm.FileService.Save(vm.DialogService.FilePath, vm.MainText.Text); //  плохие side-эффекты
         }
 
         public event EventHandler CanExecuteChanged;
