@@ -23,7 +23,9 @@ namespace SpicyEditor
 
         public string MainText
         {
-            get => _stupidText;
+            get {
+               return _stupidText;
+                }
             set
             {
                 _stupidText = value;

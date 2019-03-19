@@ -34,10 +34,12 @@
                 Click=" ButtonExit_Click"
                 IsCancel="True"/>
         <Label Name="labelReplace"
-               Content="Label"
+               Content=" "
                IsEnabled="False"
                HorizontalAlignment="Left" Margin="15,50,0,0" VerticalAlignment="Top" Width="95"/>
-        <TextBox Name ="replaceText" HorizontalAlignment="Left" 
+        <TextBox Name ="replaceText"
+                 Visibility="Collapsed"
+                 HorizontalAlignment="Left" 
                  IsEnabled="False"
                  Height="23" Margin="130,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 

@@ -30,7 +30,7 @@ namespace SpicyEditor
         }
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            this.DialogResult = false;
         }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {

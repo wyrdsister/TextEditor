@@ -39,10 +39,10 @@ namespace SpicyEditor
         {
             string find = "";
             WindowFind windowFind = new WindowFind();
-            windowFind.Owner = this;
+            //windowFind.Owner = this;
             if (windowFind.ShowDialog() == true)
                 find = windowFind.getText;
-
+            else return;
             if (TextBox.Text.Contains(find))
             {
                 int i = 0;
@@ -67,19 +67,20 @@ namespace SpicyEditor
         {
             string oldStr = ""; string newStr = "";
             WindowFind windowFind = new WindowFind();
-            windowFind.Owner = this;
+            //windowFind.Owner = this;
             windowFind.LabelSearch.Content = "Old text";
             windowFind.Title = "Replace";
             windowFind.searchButton.Content = "Replace";
             windowFind.labelReplace.Content = "New text";
-            windowFind.labelReplace.IsEnabled = true;
+            windowFind.replaceText.Visibility = Visibility;
             windowFind.replaceText.IsEnabled = true;
             if (windowFind.ShowDialog() == true)
             {
                 oldStr = windowFind.getText;
                 newStr = windowFind.getReplaceText;
+                TextBox.Text = TextBox.Text.Replace(oldStr, newStr);
             }
-            TextBox.Text = TextBox.Text.Replace(oldStr, newStr);
+            
         }
     }
 }
