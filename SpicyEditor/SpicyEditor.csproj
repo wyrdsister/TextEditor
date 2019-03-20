@@ -61,6 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\FindTextCommand.cs" />
     <Compile Include="Commands\FindCommand.cs" />
+    <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Commands\ReplaceCommand.cs" />
     <Compile Include="FindAndReplaceViewModel.cs" />
     <Compile Include="SearchWindow.xaml.cs">

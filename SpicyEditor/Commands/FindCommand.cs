@@ -37,19 +37,4 @@ namespace SpicyEditor.Commands
 
         public event EventHandler CanExecuteChanged;
     }
-
-    class HelpCommand : ICommand
-    {
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object parameter)
-        {
-            System.Diagnostics.Process.Start("https://github.com/wyrdsister/TextEditor/blob/master/README.md");
-        }
-
-        public event EventHandler CanExecuteChanged;
-    }
 }
