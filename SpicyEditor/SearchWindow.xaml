@@ -1,0 +1,58 @@
+﻿<Window x:Class="SpicyEditor.SearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SpicyEditor"
+        mc:Ignorable="d"
+        Height="129" Width="296">
+    <Grid Margin="2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Name="SearchLabel"
+               Content="Find: " />
+
+        <TextBox Grid.Row="0" Grid.Column="1"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 Width="200"
+                 Margin="2"
+                 Text ="{Binding FindAndReplaceVM.FindText}"/>
+
+        <Label Grid.Row="1" Grid.Column="0"
+               Content="Replace: "
+               HorizontalAlignment="Left"
+               Visibility="{Binding FindAndReplaceVM.IsReplace}"/>
+
+        <TextBox Grid.Row="1" Grid.Column="1"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 Width="200"
+                 Margin="2"
+                 Visibility="{Binding FindAndReplaceVM.IsReplace}"
+                 Text="{Binding FindAndReplaceVM.ReplaceText}"/>
+
+        <Button Grid.Row="2" Grid.Column="1"
+            Name="SearchButton"
+                Content="Search"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Width="75"
+                Margin="2"
+            Command="{Binding FindAndReplaceVM.FindAndReplaceCommand}" 
+            CommandParameter="{Binding .}"
+            />
+
+    </Grid>
+</Window>

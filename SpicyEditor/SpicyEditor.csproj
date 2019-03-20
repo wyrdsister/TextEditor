@@ -59,8 +59,12 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Compile Include="WindowFind.xaml.cs">
-      <DependentUpon>WindowFind.xaml</DependentUpon>
+    <Compile Include="Commands\FindTextCommand.cs" />
+    <Compile Include="Commands\FindCommand.cs" />
+    <Compile Include="Commands\ReplaceCommand.cs" />
+    <Compile Include="FindAndReplaceViewModel.cs" />
+    <Compile Include="SearchWindow.xaml.cs">
+      <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -79,7 +83,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="WindowFind.xaml">
+    <Page Include="SearchWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

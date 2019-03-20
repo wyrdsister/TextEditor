@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ICSharpCode.AvalonEdit.Document;
 
 namespace SpicyEditor.Commands
 {
-    class OpenCommand: ICommand
+    class OpenCommand : ICommand
     {
         public bool CanExecute(object parameter) => true;
 
@@ -15,11 +16,11 @@ namespace SpicyEditor.Commands
         {
             var vm = parameter as ViewModel;
             if (vm == null)
-                throw new ArgumentException("Непоняточки с параметром команды Open");
+                throw new ArgumentException("View Model Error");
 
             if (vm.DialogService.OpenFileDialog())
             {
-                vm.SetText(vm.FileService.Open(vm.DialogService.FilePath)); //  плохие side-эффекты
+                vm.MainText = new TextDocument(vm.FileService.Open(vm.DialogService.FilePath).AsString());
             }
         }
 

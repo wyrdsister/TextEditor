@@ -15,7 +15,7 @@ namespace SpicyEditor.Commands
         {
             var vm = parameter as ViewModel;
             if (vm == null)
-                throw new ArgumentException("Непоняточки с параметром команды Open");
+                throw new ArgumentException("View Model Error");
 
             if (vm.DialogService.SaveFileDialog())
                 vm.FileService.Save(vm.DialogService.FilePath, vm.MainText.Text); //  плохие side-эффекты

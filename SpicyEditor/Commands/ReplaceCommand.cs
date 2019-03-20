@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace SpicyEditor.Commands
 {
-    class SaveAsCommand: ICommand
+    class ReplaceCommand : ICommand
     {
         public bool CanExecute(object parameter) => true;
 
@@ -17,8 +17,12 @@ namespace SpicyEditor.Commands
             if (vm == null)
                 throw new ArgumentException("View Model Error");
 
-            if (vm.DialogService.SaveFileDialog())
-                vm.FileService.Save(vm.DialogService.FilePath, vm.MainText.Text); //  плохие side-эффекты
+            SearchWindow sw = new SearchWindow();
+            vm.FindAndReplaceVM = new FindAndReplaceViewModel(true);
+            sw.DataContext = vm;
+
+            sw.Show();
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public event EventHandler CanExecuteChanged;

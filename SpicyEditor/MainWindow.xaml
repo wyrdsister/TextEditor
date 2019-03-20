@@ -33,32 +33,21 @@
                 <MenuItem Header="Exit" Command="SystemCommands.CloseWindowCommand" />
             </MenuItem>
             <MenuItem Header ="Edit">
-                <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
-                <MenuItem Header="Paste" Command="ApplicationCommands.Paste" />
-                <MenuItem Header="Cut" Command="ApplicationCommands.Cut" />
                 <MenuItem Header="Undo" Command="ApplicationCommands.Undo" />
                 <MenuItem Header="Redo" Command="ApplicationCommands.Redo" />
-                <MenuItem Header="SelectAll" Command="ApplicationCommands.SelectAll" />
+                <Separator/>
+                <MenuItem Header="Cut" Command="ApplicationCommands.Cut" />
+                <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
+                <MenuItem Header="Paste" Command="ApplicationCommands.Paste" />
                 <MenuItem Header="Delete" Command="ApplicationCommands.Delete" />
-                <MenuItem Header="Find" Command="ApplicationCommands.Find" />
-                <MenuItem Header="Replace" Command="ApplicationCommands.Replace" />
-                <MenuItem Header="Help" Command="ApplicationCommands.Help" />
+                <Separator/>
+                <MenuItem Header="SelectAll" Command="ApplicationCommands.SelectAll" />
+                <Separator/>
+                <MenuItem Header="Find..." Command="{Binding FindCommand}" CommandParameter="{Binding .}" />
+                <MenuItem Header="Replace..." Command="{Binding ReplaceCommand}" CommandParameter="{Binding .}" />
+                <MenuItem Header="Help" Command="{Binding HelpCommand}" CommandParameter="{Binding .}" />
             </MenuItem >
         </Menu>
-        <avalonEdit:TextEditor
-            Grid.Row="1" 
-            xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
-            Name="textEditor"
-            FontSize="10pt"
-            Document="{Binding MainText}"
-            />
-        <!-- <TextBox x:Name="TextBox" -->
-        <!--     Grid.Row="1" TextWrapping="Wrap"  -->
-        <!--          AcceptsReturn="True"  -->
-        <!--          AcceptsTab="True"  -->
-        <!--          Text="{Binding MainText, UpdateSourceTrigger=PropertyChanged}" -->
-        <!--          VerticalScrollBarVisibility="Auto" -->
-        <!--          HorizontalScrollBarVisibility="Auto"/> -->
-
+        <ContentControl Grid.Row="1" Content="{Binding AvalonEditor}" />
     </Grid>
 </Window>
