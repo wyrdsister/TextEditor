@@ -15,11 +15,8 @@ namespace SpicyEditor
         private TextEditor m_AvalonEditor = new TextEditor();
         public TextEditor AvalonEditor => m_AvalonEditor;
 
-
         private TextDocument _smartText = new TextDocument();
-
         private Int32 _selectedStart;
-
         private int _selectedLength;
 //        private ITextStructure _text;
 
