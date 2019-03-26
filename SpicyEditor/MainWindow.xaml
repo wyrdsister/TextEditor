@@ -9,6 +9,32 @@
     <Window.DataContext>
         <local:ViewModel/>
     </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="S"
+                    Modifiers="Control" 
+                    Command="{Binding SaveCommand}" 
+                    CommandParameter="{Binding .}"/>
+        <KeyBinding Key="S"
+                    Modifiers="Control + Alt" 
+                    Command="{Binding SaveAsCommand}" 
+                    CommandParameter="{Binding .}"/>
+        <KeyBinding Key="O"
+                    Modifiers="Control" 
+                    Command="{Binding OpenCommand}" 
+                    CommandParameter="{Binding .}"/>
+        <KeyBinding Key="F"
+                    Modifiers="Control" 
+                    Command="{Binding FindCommand}" 
+                    CommandParameter="{Binding .}"/>
+        <KeyBinding Key="R"
+                    Modifiers="Control" 
+                    Command="{Binding ReplaceCommand}" 
+                    CommandParameter="{Binding .}"/>
+        <KeyBinding Key="H"
+                    Modifiers="Control" 
+                    Command="{Binding HelpCommand}" 
+                    CommandParameter="{Binding .}"/>
+    </Window.InputBindings>
     <Window.CommandBindings>
         <CommandBinding Command="SystemCommands.CloseWindowCommand"
                         Executed="CloseApp"/>
@@ -26,9 +52,9 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" VerticalAlignment="Top" Height="20">
             <MenuItem Header="File">
-                <MenuItem Header="Open..." Command="{Binding OpenCommand}" CommandParameter="{Binding .}" />
-                <MenuItem Header="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding .}"/>
-                <MenuItem Header="Save As..." Command="{Binding SaveAsCommand}" CommandParameter="{Binding .}"/>
+                <MenuItem Header="Open..." Command="{Binding OpenCommand}" CommandParameter="{Binding .}" InputGestureText="Ctrl+O"/>
+                <MenuItem Header="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding .}" InputGestureText="Ctrl+S"/>
+                <MenuItem Header="Save As..." Command="{Binding SaveAsCommand}" CommandParameter="{Binding .}" InputGestureText="Ctrl+Alt+S"/>
                 <Separator/>
                 <MenuItem Header="Exit" Command="SystemCommands.CloseWindowCommand" />
             </MenuItem>
@@ -43,9 +69,9 @@
                 <Separator/>
                 <MenuItem Header="SelectAll" Command="ApplicationCommands.SelectAll" />
                 <Separator/>
-                <MenuItem Header="Find..." Command="{Binding FindCommand}" CommandParameter="{Binding .}" />
-                <MenuItem Header="Replace..." Command="{Binding ReplaceCommand}" CommandParameter="{Binding .}" />
-                <MenuItem Header="Help" Command="{Binding HelpCommand}" CommandParameter="{Binding .}" />
+                <MenuItem Header="Find..." Command="{Binding FindCommand}" CommandParameter="{Binding .}" InputGestureText="Ctrl+F"/>
+                <MenuItem Header="Replace..." Command="{Binding ReplaceCommand}" CommandParameter="{Binding .}" InputGestureText="Ctrl+R"/>
+                <MenuItem Header="Help" Command="{Binding HelpCommand}" CommandParameter="{Binding .}" InputGestureText="Ctrl+H"/>
             </MenuItem >
         </Menu>
         <ContentControl Grid.Row="1" Content="{Binding AvalonEditor}" />

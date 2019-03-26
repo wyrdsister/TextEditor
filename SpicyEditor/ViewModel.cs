@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using System.Windows.Markup;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
 using SpicyEditor.Commands;
@@ -12,7 +13,10 @@ namespace SpicyEditor
 {
     internal class ViewModel : INotifyPropertyChanged
     {
-        private TextEditor m_AvalonEditor = new TextEditor();
+        private TextEditor m_AvalonEditor = new TextEditor()
+        {
+            SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("C#")
+        };
         public TextEditor AvalonEditor => m_AvalonEditor;
 
         private TextDocument _smartText = new TextDocument();
