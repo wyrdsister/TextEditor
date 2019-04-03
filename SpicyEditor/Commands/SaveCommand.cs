@@ -19,6 +19,8 @@ namespace SpicyEditor.Commands
 
             if (vm.DialogService.SaveFileDialog())
                 vm.FileService.Save(vm.DialogService.FilePath, vm.MainText.Text); //  плохие side-эффекты
+
+            
         }
 
         public event EventHandler CanExecuteChanged;

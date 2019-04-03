@@ -17,7 +17,7 @@ namespace SpicyEditor.Commands
             if (vm == null)
                 throw new ArgumentException("View Model Error");
 
-            if (vm.DialogService.SaveFileDialog())
+            if (vm.DialogService.SaveAsFileDialog())
                 vm.FileService.Save(vm.DialogService.FilePath, vm.MainText.Text); //  плохие side-эффекты
         }
 

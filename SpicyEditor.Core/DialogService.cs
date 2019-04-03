@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Win32;
 using System.Windows;
 
+
 namespace SpicyEditor
 {
     public class DialogService : IDialogService
@@ -18,12 +19,29 @@ namespace SpicyEditor
             if (openFileDialog.ShowDialog() == true)
             {
                 FilePath = openFileDialog.FileName;
+                SpicyEditor.Core.Properties.Settings.Default.FilePath = FilePath;
                 return true;
             }
             return false;
         }
 
         public bool SaveFileDialog()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (SpicyEditor.Core.Properties.Settings.Default.FilePath.Length > 1)
+            {
+                FilePath = SpicyEditor.Core.Properties.Settings.Default.FilePath;
+                return true;
+            }
+            else if (saveFileDialog.ShowDialog() == true)
+            {
+                FilePath = saveFileDialog.FileName;
+                SpicyEditor.Core.Properties.Settings.Default.FilePath = FilePath;
+                return true;
+            }
+            return false;
+        }
+        public bool SaveAsFileDialog()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             if (saveFileDialog.ShowDialog() == true)

@@ -11,6 +11,7 @@ namespace SpicyEditor
         void ShowMessage(string message);  
         string FilePath { get; set; }   // путь к выбранному файлу
         bool OpenFileDialog();  
-        bool SaveFileDialog();  
+        bool SaveFileDialog();
+        bool SaveAsFileDialog();
     }
 }
