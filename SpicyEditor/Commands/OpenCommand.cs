@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ICSharpCode.AvalonEdit.Document;
+using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace SpicyEditor.Commands
 {
@@ -20,7 +22,9 @@ namespace SpicyEditor.Commands
 
             if (vm.DialogService.OpenFileDialog())
             {
-                vm.MainText = new TextDocument(vm.FileService.Open(vm.DialogService.FilePath).AsString());
+                string path = vm.DialogService.FilePath;
+                vm.AvalonEditor.Load(path);
+                vm.Language = HighlightingManager.Instance.GetDefinitionByExtension(Path.GetExtension(path));
             }
         }
 

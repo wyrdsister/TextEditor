@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
-using System.Windows.Markup;
+using System.Text;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
+using ICSharpCode.AvalonEdit.Highlighting;
 using SpicyEditor.Commands;
 using SpicyEditor.Core;
 
@@ -13,28 +14,61 @@ namespace SpicyEditor
 {
     internal class ViewModel : INotifyPropertyChanged
     {
-        private TextEditor m_AvalonEditor = new TextEditor()
-        {
-            SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("C#")
-        };
-        public TextEditor AvalonEditor => m_AvalonEditor;
-
-        private TextDocument _smartText = new TextDocument();
-        private Int32 _selectedStart;
-        private int _selectedLength;
-//        private ITextStructure _text;
-
         public ViewModel()
         {
             DialogService = new DialogService();
             FileService = new SimpleFileServer();
+
+            _avalonEditor.TextChanged += (sender, args) => UpdateStates();
+        }
+
+        private void UpdateStates()
+        {
+            CountLines = _avalonEditor.Document.LineCount;
+            CountSymbols = _avalonEditor.Document.TextLength;
+            Encoding = _avalonEditor.Encoding;
+        }
+
+        private readonly TextEditor _avalonEditor = new TextEditor();
+        public TextEditor AvalonEditor => _avalonEditor;
+        
+
+        private TextDocument _smartText = new TextDocument();
+        private Int32 _selectedStart;
+        private int _selectedLength;
+
+        private int _countLines = 0;
+        public int CountLines
+        {
+            get => _countLines;
+            set
+            {
+                if (_countLines != value)
+                {
+                    _countLines = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private int _countSymbols = 0;
+        public int CountSymbols
+        {
+            get => _countSymbols;
+            set
+            {
+                if (_countSymbols != value)
+                {
+                    _countSymbols = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public IFileService FileService { get; }
         public IDialogService DialogService { get; }
 
         public FindAndReplaceViewModel FindAndReplaceVM { get; set; }
-
         public TextDocument MainText
         {
             get => AvalonEditor.Document;
@@ -42,7 +76,6 @@ namespace SpicyEditor
             {
                  AvalonEditor.Document = new TextDocument(value);
                  OnPropertyChanged(nameof(MainText));
-
             }
         }
 
@@ -59,7 +92,7 @@ namespace SpicyEditor
             set
             {
                 _selectedLength = value;
-                OnPropertyChanged(nameof(SelectedLength));
+                OnPropertyChanged();
             }
         }
 
@@ -67,7 +100,29 @@ namespace SpicyEditor
         {
             get => _selectedStart;
             set { _selectedStart = value;
-                OnPropertyChanged(nameof(SelectedStart)); }
+                OnPropertyChanged(); }
+        }
+
+        public IReadOnlyCollection<IHighlightingDefinition> AllSyntax => HighlightingManager.Instance.HighlightingDefinitions;
+
+        public IHighlightingDefinition Language
+        {
+            get => _avalonEditor.SyntaxHighlighting;
+            set
+            {
+                _avalonEditor.SyntaxHighlighting = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Encoding Encoding
+        {
+            get => _avalonEditor.Encoding;
+            set
+            {
+                _avalonEditor.Encoding = value;
+                OnPropertyChanged();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -75,12 +130,6 @@ namespace SpicyEditor
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
-
-        public void SetText(ITextStructure text)
-        {
-            _smartText = new TextDocument(text.AsString().AsEnumerable());
-            OnPropertyChanged(nameof(MainText));
         }
     }
 }

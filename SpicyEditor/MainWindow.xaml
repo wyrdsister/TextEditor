@@ -45,11 +45,17 @@
         <CommandBinding Command="ApplicationCommands.Replace"
                         Executed="ReplaceCommandHandler"/>
     </Window.CommandBindings>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
         <Menu Grid.Row="0" VerticalAlignment="Top" Height="20">
             <MenuItem Header="File">
                 <MenuItem Header="Open..." Command="{Binding OpenCommand}" CommandParameter="{Binding .}" InputGestureText="Ctrl+O"/>
@@ -74,6 +80,16 @@
                 <MenuItem Header="Help" Command="{Binding HelpCommand}" CommandParameter="{Binding .}" InputGestureText="Ctrl+H"/>
             </MenuItem >
         </Menu>
-        <ContentControl Grid.Row="1" Content="{Binding AvalonEditor}" />
+        <ContentControl Grid.Row="1" Grid.Column ="0" Content="{Binding AvalonEditor}" />
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
+            <TextBlock Text="Symbols: "/>
+            <TextBlock Text= "{Binding CountSymbols}"/>
+            <TextBlock Text=" | Lines: "/>
+            <TextBlock Text="{Binding CountLines}"/>
+            <!--  <TextBlock Text=" | Encoding: "/>
+           <TextBlock Text="{Binding Encoding.EncodingName, Mode=TwoWay}"/> -->
+            <TextBlock Text=" | Language: "/>
+            <ComboBox SelectedValue="{Binding Language, Mode=TwoWay}" ItemsSource="{Binding AllSyntax, Mode=OneTime}"/>
+        </StackPanel>
     </Grid>
 </Window>
