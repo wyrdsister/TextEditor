@@ -7,32 +7,40 @@
         mc:Ignorable="d"
         Title="SpicyEditor" Height="596.922" Width="867.164">
     <Window.DataContext>
-        <local:ViewModel/>
+        <local:TabsViewModel/>
     </Window.DataContext>
     <Window.InputBindings>
         <KeyBinding Key="S"
                     Modifiers="Control" 
                     Command="{Binding SaveCommand}" 
-                    CommandParameter="{Binding .}"/>
+                    CommandParameter="{Binding SelectedTab}"/>
         <KeyBinding Key="S"
                     Modifiers="Control + Alt" 
                     Command="{Binding SaveAsCommand}" 
-                    CommandParameter="{Binding .}"/>
+                    CommandParameter="{Binding SelectedTab}"/>
         <KeyBinding Key="O"
                     Modifiers="Control" 
                     Command="{Binding OpenCommand}" 
-                    CommandParameter="{Binding .}"/>
+                    CommandParameter="{Binding SelectedTab}"/>
         <KeyBinding Key="F"
                     Modifiers="Control" 
                     Command="{Binding FindCommand}" 
-                    CommandParameter="{Binding .}"/>
+                    CommandParameter="{Binding SelectedTab}"/>
         <KeyBinding Key="R"
                     Modifiers="Control" 
                     Command="{Binding ReplaceCommand}" 
-                    CommandParameter="{Binding .}"/>
+                    CommandParameter="{Binding SelectedTab}"/>
         <KeyBinding Key="H"
                     Modifiers="Control" 
                     Command="{Binding HelpCommand}" 
+                    CommandParameter="{Binding SelectedTab}"/>
+        <KeyBinding Key="N"
+                    Modifiers="Control" 
+                    Command="{Binding NewTabCommand}" 
+                    CommandParameter="{Binding .}"/>
+        <KeyBinding Key="W"
+                    Modifiers="Control" 
+                    Command="{Binding CloseTabCommand}" 
                     CommandParameter="{Binding .}"/>
     </Window.InputBindings>
     <Window.CommandBindings>
@@ -58,9 +66,9 @@
 
         <Menu Grid.Row="0" VerticalAlignment="Top" Height="20">
             <MenuItem Header="File">
-                <MenuItem Header="Open..." Command="{Binding OpenCommand}" CommandParameter="{Binding .}" InputGestureText="Ctrl+O"/>
-                <MenuItem Header="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding .}" InputGestureText="Ctrl+S"/>
-                <MenuItem Header="Save As..." Command="{Binding SaveAsCommand}" CommandParameter="{Binding .}" InputGestureText="Ctrl+Alt+S"/>
+                <MenuItem Header="Open..." Command="{Binding OpenCommand}" CommandParameter="{Binding SelectedTab}" InputGestureText="Ctrl+O"/>
+                <MenuItem Header="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding SelectedTab}" InputGestureText="Ctrl+S"/>
+                <MenuItem Header="Save As..." Command="{Binding SaveAsCommand}" CommandParameter="{Binding SelectedTab}" InputGestureText="Ctrl+Alt+S"/>
                 <Separator/>
                 <MenuItem Header="Exit" Command="SystemCommands.CloseWindowCommand" />
             </MenuItem>
@@ -80,16 +88,38 @@
                 <MenuItem Header="Help" Command="{Binding HelpCommand}" CommandParameter="{Binding .}" InputGestureText="Ctrl+H"/>
             </MenuItem >
         </Menu>
-        <ContentControl Grid.Row="1" Grid.Column ="0" Content="{Binding AvalonEditor}" />
-        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
-            <TextBlock Text="Symbols: "/>
-            <TextBlock Text= "{Binding CountSymbols}"/>
-            <TextBlock Text=" | Lines: "/>
-            <TextBlock Text="{Binding CountLines}"/>
-            <!--  <TextBlock Text=" | Encoding: "/>
-           <TextBlock Text="{Binding Encoding.EncodingName, Mode=TwoWay}"/> -->
-            <TextBlock Text=" | Language: "/>
-            <ComboBox SelectedValue="{Binding Language, Mode=TwoWay}" ItemsSource="{Binding AllSyntax, Mode=OneTime}"/>
-        </StackPanel>
+
+        <TabControl Grid.Row="1" Grid.Column ="0" ItemsSource="{Binding Tabs}" SelectedValue="{Binding SelectedTab, Mode=TwoWay}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding FileName}"></TextBlock>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate DataType="local:EditorViewModel">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <ContentControl Grid.Row="0"  Content="{Binding AvalonEditor}" Height="Auto" />
+
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" >
+                        <TextBlock Text="Symbols: "/>
+                        <TextBlock Text= "{Binding CountSymbols}"/>
+                        <TextBlock Text=" | Lines: "/>
+                        <TextBlock Text="{Binding CountLines}"/>
+                        <!-- <TextBlock Text=" | Encoding: "/> -->
+                        <!-- <ComboBox SelectedValue="{Binding Encoding.EncodingName, Mode=TwoWay}" ItemsSource="{Binding Encodings, Mode=OneTime}"/>  -->
+                        <TextBlock Text=" | Language: "/>
+                        <ComboBox SelectedValue="{Binding Language, Mode=TwoWay}" ItemsSource="{Binding AllSyntax, Mode=OneTime}"/>
+                    </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
     </Grid>
 </Window>

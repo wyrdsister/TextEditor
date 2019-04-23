@@ -7,31 +7,27 @@ using System.Text;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
-using SpicyEditor.Commands;
 using SpicyEditor.Core;
 
 namespace SpicyEditor
 {
-    internal class ViewModel : INotifyPropertyChanged
+    internal class EditorViewModel : INotifyPropertyChanged
     {
-        public ViewModel()
+        public EditorViewModel()
         {
             DialogService = new DialogService();
             FileService = new SimpleFileServer();
 
-            _avalonEditor.TextChanged += (sender, args) => UpdateStates();
+            AvalonEditor.TextChanged += (sender, args) => UpdateStates();
         }
 
         private void UpdateStates()
         {
-            CountLines = _avalonEditor.Document.LineCount;
-            CountSymbols = _avalonEditor.Document.TextLength;
-            Encoding = _avalonEditor.Encoding;
+            CountLines = AvalonEditor.Document.LineCount;
+            CountSymbols = AvalonEditor.Document.TextLength;
+            Encoding = AvalonEditor.Encoding;
         }
-
-        private readonly TextEditor _avalonEditor = new TextEditor();
-        public TextEditor AvalonEditor => _avalonEditor;
-        
+        public TextEditor AvalonEditor { get; } = new TextEditor();
 
         private TextDocument _smartText = new TextDocument();
         private Int32 _selectedStart;
@@ -43,30 +39,34 @@ namespace SpicyEditor
             get => _countLines;
             set
             {
-                if (_countLines != value)
-                {
-                    _countLines = value;
-                    OnPropertyChanged();
-                }
+                if (_countLines == value) return;
+                _countLines = value;
+                OnPropertyChanged();
             }
         }
 
         private int _countSymbols = 0;
+        private string _fileName;
+
         public int CountSymbols
         {
             get => _countSymbols;
             set
             {
-                if (_countSymbols != value)
-                {
-                    _countSymbols = value;
-                    OnPropertyChanged();
-                }
+                if (_countSymbols == value) return;
+                _countSymbols = value;
+                OnPropertyChanged();
             }
         }
 
         public IFileService FileService { get; }
         public IDialogService DialogService { get; }
+
+        public String FileName
+        {
+            get => _fileName;
+            set { _fileName = value; OnPropertyChanged();}
+        }
 
         public FindAndReplaceViewModel FindAndReplaceVM { get; set; }
         public TextDocument MainText
@@ -79,13 +79,6 @@ namespace SpicyEditor
             }
         }
 
-        public HelpCommand HelpCommand { get; set; } = new HelpCommand();
-        public FindCommand FindCommand { get; set; } = new FindCommand();
-        public ReplaceCommand ReplaceCommand { get; set; } = new ReplaceCommand();
-        public SaveCommand SaveCommand { get; set; } = new SaveCommand();
-        public SaveAsCommand SaveAsCommand { get; set; } = new SaveAsCommand();
-        public OpenCommand OpenCommand { get; set; } = new OpenCommand();
-
         public Int32 SelectedLength
         {
             get => _selectedLength;
@@ -95,7 +88,6 @@ namespace SpicyEditor
                 OnPropertyChanged();
             }
         }
-
         public Int32 SelectedStart
         {
             get => _selectedStart;
@@ -104,23 +96,24 @@ namespace SpicyEditor
         }
 
         public IReadOnlyCollection<IHighlightingDefinition> AllSyntax => HighlightingManager.Instance.HighlightingDefinitions;
+        public IReadOnlyCollection<Encoding> Encodings => new Encoding[] { Encoding.ASCII, Encoding.UTF7, Encoding.UTF8, Encoding.Unicode };
 
         public IHighlightingDefinition Language
         {
-            get => _avalonEditor.SyntaxHighlighting;
+            get => AvalonEditor.SyntaxHighlighting;
             set
             {
-                _avalonEditor.SyntaxHighlighting = value;
+                AvalonEditor.SyntaxHighlighting = value;
                 OnPropertyChanged();
             }
         }
 
         public Encoding Encoding
         {
-            get => _avalonEditor.Encoding;
+            get => AvalonEditor.Encoding;
             set
             {
-                _avalonEditor.Encoding = value;
+                AvalonEditor.Encoding = value;
                 OnPropertyChanged();
             }
         }

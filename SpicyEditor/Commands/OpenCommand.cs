@@ -16,7 +16,7 @@ namespace SpicyEditor.Commands
 
         public void Execute(object parameter)
         {
-            var vm = parameter as ViewModel;
+            var vm = parameter as EditorViewModel;
             if (vm == null)
                 throw new ArgumentException("View Model Error");
 
@@ -25,6 +25,8 @@ namespace SpicyEditor.Commands
                 string path = vm.DialogService.FilePath;
                 vm.AvalonEditor.Load(path);
                 vm.Language = HighlightingManager.Instance.GetDefinitionByExtension(Path.GetExtension(path));
+                vm.FileName = Path.GetFileName(path);
+
             }
         }
 

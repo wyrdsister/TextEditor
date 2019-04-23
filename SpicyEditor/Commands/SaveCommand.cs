@@ -13,7 +13,7 @@ namespace SpicyEditor.Commands
 
         public void Execute(object parameter)
         {
-            var vm = parameter as ViewModel;
+            var vm = parameter as EditorViewModel;
             if (vm == null)
                 throw new ArgumentException("View Model Error");
 
