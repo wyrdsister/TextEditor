@@ -47,7 +47,7 @@ namespace SpicyEditor
         }
 
         private int _countSymbols = 0;
-        private string _fileName;
+        private string _fileName = "untitled";
 
         public int CountSymbols
         {

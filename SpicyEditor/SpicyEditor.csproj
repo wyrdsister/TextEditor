@@ -71,6 +71,9 @@
     </Compile>
     <Compile Include="SkinResourceDictionary .cs" />
     <Compile Include="TabsViewModel.cs" />
+    <Page Include="PurpleStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BlueStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

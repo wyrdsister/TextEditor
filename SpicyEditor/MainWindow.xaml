@@ -17,7 +17,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <local:SkinResourceDictionary
                     BlueSource="BlueStyle.xaml"
-                    GreenSource="GreenStyle.xaml" />
+                    GreenSource="GreenStyle.xaml"
+                    PurpleSource="PurpleStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 
@@ -109,6 +110,7 @@
             <MenuItem Header="View">
                 <MenuItem Header="Green" Click="OnGreenClick" />
                 <MenuItem Header="Blue" Click="OnBlueClick" />
+                <MenuItem Header="Purple" Click="OnPurpleClick" />
             </MenuItem>
         </Menu>
 
@@ -116,7 +118,7 @@
                     SelectedValue="{Binding SelectedTab, Mode=TwoWay}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding FileName}" />
+                    <TextBlock Text="{Binding FileName}"/>
                 </DataTemplate>
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
@@ -129,7 +131,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <ContentControl Grid.Row="0" Content="{Binding AvalonEditor}" Height="Auto" />
+                        <ContentControl Grid.Row="0" Content="{Binding AvalonEditor}" Height="Auto"/>
 
                         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Text="Symbols: " />

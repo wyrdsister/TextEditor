@@ -3,8 +3,8 @@
                     xmlns:local="clr-namespace:SpicyEditor">
 
     <Style x:Key="CommonStyleControls" TargetType="Control">
-        <Setter Property="Background" Value="LightSeaGreen" />
-        <Setter Property="BorderBrush" Value="LightSeaGreen" />
+        <Setter Property="Background" Value="Plum" />
+        <Setter Property="BorderBrush" Value="Plum" />
     </Style>
     <Style BasedOn="{StaticResource CommonStyleControls}" TargetType="Menu" />
     <Style BasedOn="{StaticResource CommonStyleControls}" TargetType="Separator" />
@@ -40,8 +40,8 @@
                                            Placement="Bottom"
                                            IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                            PlacementTarget="{Binding ElementName=templateRoot}">
-                                        <Border x:Name="SubMenuBorder" Background="LightSeaGreen"
-                                                BorderBrush="LightSeaGreen"
+                                        <Border x:Name="SubMenuBorder" Background="Plum"
+                                                BorderBrush="Plum"
                                                 BorderThickness="1" Padding="2">
                                             <ScrollViewer x:Name="SubMenuScrollViewer"
                                                           Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
@@ -117,7 +117,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Panel" Property="Background" Value="PaleTurquoise" />
+                            <Setter TargetName="Panel" Property="Background" Value="LavenderBlush" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="False">
                             <Setter TargetName="Panel" Property="Background" Value="White" />

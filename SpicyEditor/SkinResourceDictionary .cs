@@ -11,6 +11,7 @@ namespace SpicyEditor
     {
         private Uri _greenSource;
         private Uri _blueSource;
+        private Uri _purpleSource;
 
         public Uri GreenSource
         {
@@ -32,9 +33,19 @@ namespace SpicyEditor
             }
         }
 
+        public Uri PurpleSource
+        {
+            get { return _purpleSource; }
+            set
+            {
+                _purpleSource = value;
+                UpdateSource();
+            }
+        }
+
         public void UpdateSource()
         {
-            var val = MainWindow.Skin == Skin.Green ? GreenSource : BlueSource;
+            var val = MainWindow.Skin == Skin.Green ? GreenSource : (MainWindow.Skin == Skin.Blue ? BlueSource : PurpleSource);
             if (val != null && base.Source != val)
                 base.Source = val;
         }

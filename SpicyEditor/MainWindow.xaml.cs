@@ -27,6 +27,8 @@ namespace SpicyEditor
         Green,
         [Description("Blue")]
         Blue
+    ,
+    Purple
     }
 
     public partial class MainWindow : Window
@@ -63,6 +65,12 @@ namespace SpicyEditor
         private void OnGreenClick(object sender, RoutedEventArgs e)
         {
             ChangeSkin(Skin.Green);
+            RefreshWindow();
+        }
+
+        private void OnPurpleClick(object sender, RoutedEventArgs e)
+        {
+            ChangeSkin(Skin.Purple);
             RefreshWindow();
         }
 
