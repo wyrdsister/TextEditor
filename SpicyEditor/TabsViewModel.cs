@@ -1,7 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Windows.Input;
+using System.Xml.Serialization;
 using SpicyEditor.Commands;
 
 namespace SpicyEditor
@@ -17,7 +22,6 @@ namespace SpicyEditor
         }
 
         public ObservableCollection<EditorViewModel> Tabs { get; set; }
-
 
         public EditorViewModel SelectedTab
         {

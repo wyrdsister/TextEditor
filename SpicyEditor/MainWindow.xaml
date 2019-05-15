@@ -5,118 +5,143 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpicyEditor"
         mc:Ignorable="d"
-        Title="SpicyEditor" Height="596.922" Width="867.164">
+        Title="SpicyEditor"
+        Height="596.922"
+        Width="867.164">
     <Window.DataContext>
-        <local:TabsViewModel/>
+        <local:TabsViewModel />
     </Window.DataContext>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <local:SkinResourceDictionary
+                    BlueSource="BlueStyle.xaml"
+                    GreenSource="GreenStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+
+    </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Key="S"
-                    Modifiers="Control" 
-                    Command="{Binding SaveCommand}" 
-                    CommandParameter="{Binding SelectedTab}"/>
+                    Modifiers="Control"
+                    Command="{Binding SaveCommand}"
+                    CommandParameter="{Binding SelectedTab}" />
         <KeyBinding Key="S"
-                    Modifiers="Control + Alt" 
-                    Command="{Binding SaveAsCommand}" 
-                    CommandParameter="{Binding SelectedTab}"/>
+                    Modifiers="Control + Alt"
+                    Command="{Binding SaveAsCommand}"
+                    CommandParameter="{Binding SelectedTab}" />
         <KeyBinding Key="O"
-                    Modifiers="Control" 
-                    Command="{Binding OpenCommand}" 
-                    CommandParameter="{Binding SelectedTab}"/>
+                    Modifiers="Control"
+                    Command="{Binding OpenCommand}"
+                    CommandParameter="{Binding SelectedTab}" />
         <KeyBinding Key="F"
-                    Modifiers="Control" 
-                    Command="{Binding FindCommand}" 
-                    CommandParameter="{Binding SelectedTab}"/>
+                    Modifiers="Control"
+                    Command="{Binding FindCommand}"
+                    CommandParameter="{Binding SelectedTab}" />
         <KeyBinding Key="R"
-                    Modifiers="Control" 
-                    Command="{Binding ReplaceCommand}" 
-                    CommandParameter="{Binding SelectedTab}"/>
+                    Modifiers="Control"
+                    Command="{Binding ReplaceCommand}"
+                    CommandParameter="{Binding SelectedTab}" />
         <KeyBinding Key="H"
-                    Modifiers="Control" 
-                    Command="{Binding HelpCommand}" 
-                    CommandParameter="{Binding SelectedTab}"/>
+                    Modifiers="Control"
+                    Command="{Binding HelpCommand}"
+                    CommandParameter="{Binding SelectedTab}" />
         <KeyBinding Key="N"
-                    Modifiers="Control" 
-                    Command="{Binding NewTabCommand}" 
-                    CommandParameter="{Binding .}"/>
+                    Modifiers="Control"
+                    Command="{Binding NewTabCommand}"
+                    CommandParameter="{Binding .}" />
         <KeyBinding Key="W"
-                    Modifiers="Control" 
-                    Command="{Binding CloseTabCommand}" 
-                    CommandParameter="{Binding .}"/>
+                    Modifiers="Control"
+                    Command="{Binding CloseTabCommand}"
+                    CommandParameter="{Binding .}" />
     </Window.InputBindings>
     <Window.CommandBindings>
         <CommandBinding Command="SystemCommands.CloseWindowCommand"
-                        Executed="CloseApp"/>
+                        Executed="CloseApp" />
         <CommandBinding Command="ApplicationCommands.Delete"
-                        Executed="DeleteCommandHandler"/>
+                        Executed="DeleteCommandHandler" />
         <CommandBinding Command="ApplicationCommands.Find"
-                        Executed="FindCommandHandler"/>
+                        Executed="FindCommandHandler" />
         <CommandBinding Command="ApplicationCommands.Replace"
-                        Executed="ReplaceCommandHandler"/>
+                        Executed="ReplaceCommandHandler" />
     </Window.CommandBindings>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Menu Grid.Row="0" VerticalAlignment="Top" Height="20">
+        <Menu Name ="Foo" Grid.Row="0" VerticalAlignment="Top" Height="20">
             <MenuItem Header="File">
-                <MenuItem Header="Open..." Command="{Binding OpenCommand}" CommandParameter="{Binding SelectedTab}" InputGestureText="Ctrl+O"/>
-                <MenuItem Header="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding SelectedTab}" InputGestureText="Ctrl+S"/>
-                <MenuItem Header="Save As..." Command="{Binding SaveAsCommand}" CommandParameter="{Binding SelectedTab}" InputGestureText="Ctrl+Alt+S"/>
-                <Separator/>
+                <MenuItem Header="Open..." Command="{Binding OpenCommand}" CommandParameter="{Binding SelectedTab}"
+                          InputGestureText="Ctrl+O" />
+                <MenuItem Header="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding SelectedTab}"
+                          InputGestureText="Ctrl+S" />
+                <MenuItem Header="Save As..." Command="{Binding SaveAsCommand}"
+                          CommandParameter="{Binding SelectedTab}" InputGestureText="Ctrl+Alt+S" />
+                <Separator />
                 <MenuItem Header="Exit" Command="SystemCommands.CloseWindowCommand" />
             </MenuItem>
-            <MenuItem Header ="Edit">
+            <MenuItem Header="Edit">
                 <MenuItem Header="Undo" Command="ApplicationCommands.Undo" />
                 <MenuItem Header="Redo" Command="ApplicationCommands.Redo" />
-                <Separator/>
+                <Separator />
                 <MenuItem Header="Cut" Command="ApplicationCommands.Cut" />
                 <MenuItem Header="Copy" Command="ApplicationCommands.Copy" />
                 <MenuItem Header="Paste" Command="ApplicationCommands.Paste" />
                 <MenuItem Header="Delete" Command="ApplicationCommands.Delete" />
-                <Separator/>
+                <Separator />
                 <MenuItem Header="SelectAll" Command="ApplicationCommands.SelectAll" />
-                <Separator/>
-                <MenuItem Header="Find..." Command="{Binding FindCommand}" CommandParameter="{Binding .}" InputGestureText="Ctrl+F"/>
-                <MenuItem Header="Replace..." Command="{Binding ReplaceCommand}" CommandParameter="{Binding .}" InputGestureText="Ctrl+R"/>
-                <MenuItem Header="Help" Command="{Binding HelpCommand}" CommandParameter="{Binding .}" InputGestureText="Ctrl+H"/>
-            </MenuItem >
+                <Separator />
+                <MenuItem Header="Find..." Command="{Binding FindCommand}" CommandParameter="{Binding SelectedTab}"
+                          InputGestureText="Ctrl+F" />
+                <MenuItem Header="Replace..." Command="{Binding ReplaceCommand}"
+                          CommandParameter="{Binding SelectedTab}" InputGestureText="Ctrl+R" />
+                <MenuItem Header="Help" Command="{Binding HelpCommand}" InputGestureText="Ctrl+H" />
+            </MenuItem>
+            <MenuItem Header="Skin">
+                <MenuItem Header="Green" Click="OnGreenClick" />
+                <MenuItem Header="Blue" Click="OnBlueClick" />
+            </MenuItem>
         </Menu>
 
-        <TabControl Grid.Row="1" Grid.Column ="0" ItemsSource="{Binding Tabs}" SelectedValue="{Binding SelectedTab, Mode=TwoWay}">
+        <TabControl Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Tabs}"
+                    SelectedValue="{Binding SelectedTab, Mode=TwoWay}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding FileName}"></TextBlock>
+                    <TextBlock Text="{Binding FileName}" />
                 </DataTemplate>
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
                 <DataTemplate DataType="local:EditorViewModel">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <ContentControl Grid.Row="0"  Content="{Binding AvalonEditor}" Height="Auto" />
+                        <ContentControl Grid.Row="0" Content="{Binding AvalonEditor}" Height="Auto" />
 
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" >
-                        <TextBlock Text="Symbols: "/>
-                        <TextBlock Text= "{Binding CountSymbols}"/>
-                        <TextBlock Text=" | Lines: "/>
-                        <TextBlock Text="{Binding CountLines}"/>
-                        <!-- <TextBlock Text=" | Encoding: "/> -->
-                        <!-- <ComboBox SelectedValue="{Binding Encoding.EncodingName, Mode=TwoWay}" ItemsSource="{Binding Encodings, Mode=OneTime}"/>  -->
-                        <TextBlock Text=" | Language: "/>
-                        <ComboBox SelectedValue="{Binding Language, Mode=TwoWay}" ItemsSource="{Binding AllSyntax, Mode=OneTime}"/>
-                    </StackPanel>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Text="Symbols: " />
+                            <TextBlock Text="{Binding CountSymbols}" />
+                            <TextBlock Text=" | Lines: " />
+                            <TextBlock Text="{Binding CountLines}" />
+                            <!-- <TextBlock Text=" | Encoding: "/> -->
+                            <!-- <ComboBox SelectedValue="{Binding Encoding.EncodingName, Mode=TwoWay}" ItemsSource="{Binding Encodings, Mode=OneTime}"/>  -->
+                            <TextBlock Text=" | Language: " />
+                            <ComboBox SelectedValue="{Binding Language, Mode=TwoWay}"
+                                      ItemsSource="{Binding AllSyntax, Mode=OneTime}" />
+                        </StackPanel>
                     </Grid>
                 </DataTemplate>
             </TabControl.ContentTemplate>

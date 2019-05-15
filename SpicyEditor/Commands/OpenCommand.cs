@@ -25,6 +25,7 @@ namespace SpicyEditor.Commands
                 string path = vm.DialogService.FilePath;
                 vm.AvalonEditor.Load(path);
                 vm.Language = HighlightingManager.Instance.GetDefinitionByExtension(Path.GetExtension(path));
+                vm.Encoding = vm.AvalonEditor.Encoding;
                 vm.FileName = Path.GetFileName(path);
 
             }
