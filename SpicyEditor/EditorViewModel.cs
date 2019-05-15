@@ -25,8 +25,8 @@ namespace SpicyEditor
         {
             CountLines = AvalonEditor.Document.LineCount;
             CountSymbols = AvalonEditor.Document.TextLength;
-            Encoding = AvalonEditor.Encoding;
         }
+
         public TextEditor AvalonEditor { get; } = new TextEditor();
 
         private TextDocument _smartText = new TextDocument();
@@ -34,6 +34,7 @@ namespace SpicyEditor
         private int _selectedLength;
 
         private int _countLines = 0;
+
         public int CountLines
         {
             get => _countLines;
@@ -65,17 +66,22 @@ namespace SpicyEditor
         public String FileName
         {
             get => _fileName;
-            set { _fileName = value; OnPropertyChanged();}
+            set
+            {
+                _fileName = value;
+                OnPropertyChanged();
+            }
         }
 
         public FindAndReplaceViewModel FindAndReplaceVM { get; set; }
+
         public TextDocument MainText
         {
             get => AvalonEditor.Document;
             set
             {
-                 AvalonEditor.Document = new TextDocument(value);
-                 OnPropertyChanged(nameof(MainText));
+                AvalonEditor.Document = new TextDocument(value);
+                OnPropertyChanged(nameof(MainText));
             }
         }
 
@@ -88,17 +94,22 @@ namespace SpicyEditor
                 OnPropertyChanged();
             }
         }
+
         public Int32 SelectedStart
         {
             get => _selectedStart;
-            set { _selectedStart = value;
-                OnPropertyChanged(); }
+            set
+            {
+                _selectedStart = value;
+                OnPropertyChanged();
+            }
         }
 
-        public IReadOnlyCollection<IHighlightingDefinition> AllSyntax => HighlightingManager.Instance.HighlightingDefinitions;
-        public IReadOnlyCollection<Encoding> Encodings => new Encoding[] { Encoding.ASCII, Encoding.UTF7, Encoding.UTF8, Encoding.Unicode };
+        public IReadOnlyCollection<IHighlightingDefinition> AllSyntax =>
+            HighlightingManager.Instance.HighlightingDefinitions;
 
         public IHighlightingDefinition Language
+
         {
             get => AvalonEditor.SyntaxHighlighting;
             set
@@ -108,12 +119,14 @@ namespace SpicyEditor
             }
         }
 
-        public Encoding Encoding
+        private string _encodingName = "";
+        
+        public string Encoding
         {
-            get => AvalonEditor.Encoding;
+            get => _encodingName;
             set
             {
-                AvalonEditor.Encoding = value;
+                _encodingName = value;
                 OnPropertyChanged();
             }
         }

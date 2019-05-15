@@ -106,7 +106,7 @@
                           CommandParameter="{Binding SelectedTab}" InputGestureText="Ctrl+R" />
                 <MenuItem Header="Help" Command="{Binding HelpCommand}" InputGestureText="Ctrl+H" />
             </MenuItem>
-            <MenuItem Header="Skin">
+            <MenuItem Header="View">
                 <MenuItem Header="Green" Click="OnGreenClick" />
                 <MenuItem Header="Blue" Click="OnBlueClick" />
             </MenuItem>
@@ -136,8 +136,9 @@
                             <TextBlock Text="{Binding CountSymbols}" />
                             <TextBlock Text=" | Lines: " />
                             <TextBlock Text="{Binding CountLines}" />
-                            <!-- <TextBlock Text=" | Encoding: "/> -->
-                            <!-- <ComboBox SelectedValue="{Binding Encoding.EncodingName, Mode=TwoWay}" ItemsSource="{Binding Encodings, Mode=OneTime}"/>  -->
+                            <TextBlock Text=" | Encoding: "/>
+                            <TextBlock Text="{Binding Encoding}" />
+                            <!-- <ComboBox SelectedValue="{Binding Encoding, Mode=TwoWay}" ItemsSource="{Binding Encodings, Mode=OneTime}"/> -->
                             <TextBlock Text=" | Language: " />
                             <ComboBox SelectedValue="{Binding Language, Mode=TwoWay}"
                                       ItemsSource="{Binding AllSyntax, Mode=OneTime}" />
